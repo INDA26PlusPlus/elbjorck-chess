@@ -2446,9 +2446,33 @@ impl Board {
 
 #[cfg(test)]
 mod tests {
-    
+    use super::*;
     #[test]
     fn test1() {
-        assert_eq!(2 + 2, 4);
+        let initial_boards: [u64; 12] = [0; 12];
+        let mut board = Board {
+            boards: initial_boards,
+            w_enpesant: 0,
+            b_enpesant: 0,
+
+            w_l_rook_moved: false,
+            w_r_rook_moved: false,
+            w_k_moved: false,
+
+            b_l_rook_moved: false,
+            b_r_rook_moved: false,
+            b_k_moved: false,
+
+            white_turn: true,
+        };
+
+        Board::add_piece(&mut board, Board::W_KINGS, 2);
+        Board::add_piece(&mut board, Board::B_BISHOPS, 16);
+        Board::add_piece(&mut board, Board::B_BISHOPS, 8);
+        Board::add_piece(&mut board, Board::B_BISHOPS, 24);
+        Board::add_piece(&mut board, Board::B_BISHOPS, 32);
+
+        assert_eq!(true, Board::is_mate_white(&board));
     }
 }
+
