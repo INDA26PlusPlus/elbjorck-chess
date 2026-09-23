@@ -2119,10 +2119,15 @@ impl Board {
         // i = attacker position
         for i in 0..64 {
             let attacker_type = Board::piece_type_on_position(&board, i);
+            if attacker_type == -1 {
+                continue;
+            }
             let mut king_position: u64 = 0;
             for j in 0..64 as u64 {
-                if Board::piece_type_on_position(board, j as usize) == Board::W_KINGS as isize
-                    || Board::piece_type_on_position(board, j as usize) == Board::B_KINGS as isize
+                if (Board::piece_type_on_position(board, j as usize) == Board::W_KINGS as isize
+                    && Board::board_is_black(attacker_type as usize))
+                    || (Board::piece_type_on_position(board, j as usize) == Board::B_KINGS as isize
+                        && Board::board_is_white(attacker_type as usize))
                 {
                     king_position = j;
                 }
