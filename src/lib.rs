@@ -388,21 +388,21 @@ impl Board {
             if end_position as isize == start_position as isize + 2 {
                 if piece_type == Board::W_KINGS as isize {
                     self.boards[Board::W_ROOKS] += end_board >> 1;
-                    self.boards[Board::W_ROOKS] = self.boards[Board::W_ROOKS] & !(end_board << 1);
+                    self.boards[Board::W_ROOKS] = self.boards[Board::W_ROOKS] & !(end_board << 2);
                 }
                 if piece_type == Board::B_KINGS as isize {
                     self.boards[Board::B_ROOKS] += end_board >> 1;
-                    self.boards[Board::B_ROOKS] = self.boards[Board::B_ROOKS] & !(end_board << 1);
+                    self.boards[Board::B_ROOKS] = self.boards[Board::B_ROOKS] & !(end_board << 2);
                 }
             }
             if end_position as isize == start_position as isize - 2 {
                 if piece_type == Board::W_KINGS as isize {
                     self.boards[Board::W_ROOKS] += end_board << 1;
-                    self.boards[Board::W_ROOKS] = self.boards[Board::W_ROOKS] & !(end_board >> 2);
+                    self.boards[Board::W_ROOKS] = self.boards[Board::W_ROOKS] & !(end_board >> 1);
                 }
                 if piece_type == Board::B_KINGS as isize {
                     self.boards[Board::B_ROOKS] += end_board << 1;
-                    self.boards[Board::B_ROOKS] = self.boards[Board::B_ROOKS] & !(end_board >> 2);
+                    self.boards[Board::B_ROOKS] = self.boards[Board::B_ROOKS] & !(end_board >> 1);
                 }
             }
             if end_position >= 8 {
