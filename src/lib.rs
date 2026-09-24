@@ -1760,24 +1760,7 @@ impl Board {
                         _ => {}
                     }
                     if looked_at_position <= 63 && looked_at_position >= 0 {
-                        let piece_type_at_position: isize =
-                            Board::piece_type_on_position(boards, looked_at_position as usize);
-                        if piece_type_at_position >= 0 {
-                            if piece_type == Board::W_KNIGHTS
-                                && piece_type_at_position >= Board::B_PAWNS as isize
-                            {
-                                possible_attacks += 1 << looked_at_position as u32;
-                                //possible_moves.push((piece_position, looked_at_position as u32));
-                            } else if piece_type == Board::B_KNIGHTS
-                                && piece_type_at_position < Board::B_PAWNS as isize
-                            {
-                                possible_attacks += 1 << looked_at_position as u32;
-                                //possible_moves.push((piece_position, looked_at_position as u32));
-                            }
-                        } else {
-                            possible_attacks += 1 << looked_at_position as u32;
-                            //possible_moves.push((piece_position, looked_at_position as u32));
-                        }
+                        possible_attacks += 1 << looked_at_position as u32;
                     }
                 }
             }
