@@ -336,10 +336,10 @@ impl Board {
         if Board::piece_type_on_position(self, 7 + 7 * 8) != Board::B_ROOKS as isize {
             self.b_r_rook_moved = true;
         }
-        if Board::piece_type_on_position(self, 4) != Board::W_KINGS as isize {
+        if Board::piece_type_on_position(self, 3) != Board::W_KINGS as isize {
             self.w_k_moved = true;
         }
-        if Board::piece_type_on_position(self, 4 + 7 * 8) != Board::B_KINGS as isize {
+        if Board::piece_type_on_position(self, 3 + 7 * 8) != Board::B_KINGS as isize {
             self.b_k_moved = true;
         }
 
@@ -1525,52 +1525,52 @@ impl Board {
                     //possible_moves.push((piece_position, piece_position - 8));
                 }
 
-                if !boards.w_k_moved && piece_type == Board::W_KINGS && piece_position == 4 {
+                if !boards.w_k_moved && piece_type == Board::W_KINGS && piece_position == 3 {
                     {
-                        if Board::piece_type_on_position(boards, piece_position as usize + 1) == -1
-                            && Board::piece_type_on_position(boards, piece_position as usize + 2)
+                        if Board::piece_type_on_position(boards, piece_position as usize - 1) == -1
+                            && Board::piece_type_on_position(boards, piece_position as usize - 2)
                                 == -1
-                            && Board::piece_type_on_position(boards, piece_position as usize + 3)
+                            && Board::piece_type_on_position(boards, piece_position as usize - 3)
                                 == Board::W_ROOKS as isize
                             && !boards.w_r_rook_moved
                         {
-                            possible_moves += 1 << piece_position + 2;
-                        }
-                        if Board::piece_type_on_position(boards, piece_position as usize - 1) == -1
-                            && Board::piece_type_on_position(boards, piece_position as usize - 2)
-                                == -1
-                            && Board::piece_type_on_position(boards, piece_position as usize - 3)
-                                == -1
-                            && Board::piece_type_on_position(boards, piece_position as usize - 4)
-                                == Board::W_ROOKS as isize
-                            && !boards.w_l_rook_moved
-                        {
                             possible_moves += 1 << piece_position - 2;
                         }
-                    }
-                }
-                if !boards.b_k_moved && piece_type == Board::B_KINGS && piece_position == 4 + 7 * 8
-                {
-                    {
                         if Board::piece_type_on_position(boards, piece_position as usize + 1) == -1
                             && Board::piece_type_on_position(boards, piece_position as usize + 2)
                                 == -1
                             && Board::piece_type_on_position(boards, piece_position as usize + 3)
-                                == Board::B_ROOKS as isize
-                            && !boards.b_r_rook_moved
+                                == -1
+                            && Board::piece_type_on_position(boards, piece_position as usize + 4)
+                                == Board::W_ROOKS as isize
+                            && !boards.w_l_rook_moved
                         {
                             possible_moves += 1 << piece_position + 2;
                         }
+                    }
+                }
+                if !boards.b_k_moved && piece_type == Board::B_KINGS && piece_position == 3 + 7 * 8
+                {
+                    {
                         if Board::piece_type_on_position(boards, piece_position as usize - 1) == -1
                             && Board::piece_type_on_position(boards, piece_position as usize - 2)
                                 == -1
                             && Board::piece_type_on_position(boards, piece_position as usize - 3)
+                                == Board::B_ROOKS as isize
+                            && !boards.b_r_rook_moved
+                        {
+                            possible_moves += 1 << piece_position - 2;
+                        }
+                        if Board::piece_type_on_position(boards, piece_position as usize + 1) == -1
+                            && Board::piece_type_on_position(boards, piece_position as usize + 2)
                                 == -1
-                            && Board::piece_type_on_position(boards, piece_position as usize - 4)
+                            && Board::piece_type_on_position(boards, piece_position as usize + 3)
+                                == -1
+                            && Board::piece_type_on_position(boards, piece_position as usize + 4)
                                 == Board::B_ROOKS as isize
                             && !boards.b_l_rook_moved
                         {
-                            possible_moves += 1 << piece_position - 2;
+                            possible_moves += 1 << piece_position + 2;
                         }
                     }
                 }
