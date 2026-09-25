@@ -62,7 +62,7 @@ impl Board {
         println!("Promoting");
     }
 
-    pub fn test_castle(&mut self) {
+    pub fn _castle(&mut self) {
         /**/
         println!("White tests:");
 
@@ -309,16 +309,13 @@ impl Board {
         let piece_type: isize = Board::piece_type_on_position(self, start_position);
 
         if piece_type == -1 {
-            println!("Not a piece");
             return false;
         }
 
         if Board::board_is_black(piece_type as usize) && self.white_turn {
-            println!("Whites turn");
             return false;
         }
         if Board::board_is_white(piece_type as usize) && !self.white_turn {
-            println!("Black turn");
             return false;
         }
 
@@ -484,13 +481,6 @@ impl Board {
             }
         }
 
-        println!("Black moves:");
-        Board::print_bitboard(black_moves);
-        println!("White moves:");
-        Board::print_bitboard(white_moves);
-        println!("King board: ");
-        Board::print_bitboard(king_board);
-
         if white_moves == 0 && king_board & black_moves > 0 {
             return true;
         }
@@ -520,13 +510,6 @@ impl Board {
                 king_board = 1 << i;
             }
         }
-
-        println!("Black moves:");
-        Board::print_bitboard(black_moves);
-        println!("White moves:");
-        Board::print_bitboard(white_moves);
-        println!("King board: ");
-        Board::print_bitboard(king_board);
 
         if black_moves == 0 && king_board & white_moves > 0 {
             return true;
