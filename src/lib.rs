@@ -516,7 +516,7 @@ impl Board {
             if Board::board_is_black(piece_type as usize) {
                 black_moves = black_moves | all_moves[i];
             }
-            if piece_type == Board::W_KINGS as isize {
+            if piece_type == Board::B_KINGS as isize {
                 king_board = 1 << i;
             }
         }
