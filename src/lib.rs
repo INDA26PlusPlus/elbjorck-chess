@@ -319,8 +319,6 @@ impl Board {
             return false;
         }
 
-        
-
         if Board::piece_type_on_position(self, 0) != Board::W_ROOKS as isize {
             self.w_l_rook_moved = true;
         }
@@ -515,6 +513,24 @@ impl Board {
             return true;
         }
         return false;
+    }
+
+    pub fn num_legal_moves_for_current_color(board: &Board, legal_moves: [u64; 64]) -> u32 {
+        let mut num_legal_moves: u32 = 0;
+        for i in 0..64 {
+            let piece_type = Board::piece_type_on_position(board, i);
+            let is_relevant_color = piece_type != -1
+                && if board.white_turn {
+                    piece_type < 6
+                } else {
+                    piece_type > 5
+                };
+            if !is_relevant_color {
+                continue;
+            }
+            num_legal_moves += legal_moves[i].count_ones();
+        }
+        return num_legal_moves;
     }
 
     pub fn print_divider() {
